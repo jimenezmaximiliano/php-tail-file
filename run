@@ -1,0 +1,21 @@
+#!/bin/bash
+
+function test() {
+    ./vendor/bin/phpunit
+}
+
+function coverage() {
+    ./vendor/bin/phpunit --coverage-html coverage
+}
+
+case "$1" in
+test)
+    test
+    ;;
+coverage)
+    coverage
+    ;;
+*)
+    echo "Commands: test, coverage"
+    ;;
+esac
