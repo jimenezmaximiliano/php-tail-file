@@ -6,8 +6,8 @@ use Exception;
 
 final class FailedToReadFile extends Exception
 {
-    public function __construct(string $absoluteFilePath)
+    public function __construct(string $absoluteFilePath, ?Exception $exception = null)
     {
-        parent::__construct("Could not open file for reading: " . $absoluteFilePath);
+        parent::__construct("Could not open file for reading: " . $absoluteFilePath, 0, $exception);
     }
 }

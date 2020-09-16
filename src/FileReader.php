@@ -2,9 +2,12 @@
 declare(strict_types=1);
 namespace JimenezMaximiliano\Tail;
 
+use Exception;
 use JimenezMaximiliano\Tail\Exceptions\FailedToCloseFile;
 use JimenezMaximiliano\Tail\Exceptions\FailedToReadFile;
 use JimenezMaximiliano\Tail\Exceptions\FileClosed;
+use JimenezMaximiliano\Tail\Exceptions\NotAFile;
+use JimenezMaximiliano\Tail\Exceptions\NotSeekable;
 
 final class FileReader
 {
@@ -14,9 +17,9 @@ final class FileReader
     private $fileHandle;
 
     /**
-     * FileReader constructor.
      * @param string $absoluteFilePath
      * @throws FailedToReadFile
+     * @throws NotAFile
      */
     public function __construct(string $absoluteFilePath)
     {
@@ -27,28 +30,50 @@ final class FileReader
     /**
      * @param string $absoluteFilePath
      * @throws FailedToReadFile
+     * @throws NotAFile
      */
     private function openFile(string $absoluteFilePath): void
     {
-        $fileHandle = fopen($absoluteFilePath, "r");
+        $this->rejectDirectory($absoluteFilePath);
+
+        try {
+            $fileHandle = fopen($absoluteFilePath, "r");
+        } catch (Exception $exception) {
+            throw new FailedToReadFile($absoluteFilePath, $exception);
+        }
 
         if (false === $fileHandle) {
-            throw new FailedToReadFile;
+            throw new FailedToReadFile($absoluteFilePath);
         }
 
         $this->fileHandle = $fileHandle;
     }
 
     /**
+     * @param string $absoluteFilePath
+     * @throws NotAFile
+     */
+    private function rejectDirectory(string $absoluteFilePath): void
+    {
+        if (is_dir($absoluteFilePath)) {
+            throw new NotAFile($absoluteFilePath);
+        }
+    }
+
+    /**
      * @return Character
-     * @throws FileClosed
+     * @throws FileClosed|NotSeekable
      */
     public function readPreviousCharacter(): Character
     {
         $this->rejectClosedFile();
 
         $this->cursor -= 1;
-        $readResult = fseek($this->fileHandle, $this->cursor, SEEK_END);
+        try {
+            $readResult = fseek($this->fileHandle, $this->cursor, SEEK_END);
+        } catch(Exception $exception) {
+            throw new NotSeekable($this->absoluteFilePath, $exception);
+        }
 
         if ($readResult === -1) {
             // Nothing to read
@@ -89,6 +114,7 @@ final class FileReader
 
     /**
      * @throws FileClosed
+     * @throws NotSeekable
      */
     public function readPreviousCharacterSkippingNewLineCharacters(): Character
     {
