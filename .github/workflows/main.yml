@@ -1,0 +1,27 @@
+name: CI
+on: [push]
+jobs:
+  build:
+    strategy:
+      matrix:
+        # php: [ '7.4', '8.0', '8.1' ]
+        php: [ '7.4' ]
+        os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
+        phpunit: ['9']
+    runs-on: ${{ matrix.os }}
+    name: PHP version ${{ matrix.php }} on ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom
+          coverage: xdebug 
+          tools: phpunit:${{ matrix.phpunit }}
+      - name: Run composer install
+        run: composer install
+      - name: Run tests
+        run: ./vendor/bin/phpunit
+
