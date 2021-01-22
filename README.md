@@ -4,6 +4,13 @@
 
 Efficiently tail a file from PHP
 
+- Great performance
+- It doesn't load the whole file to memory
+- Skips trailing new lines and empty lines
+- No dependencies
+- Tested on Linux, Windows and macOS
+- Compatible with PHP 7.4 and 8
+
 ## Installation
 
 ```bash
@@ -20,9 +27,3 @@ $lines = Tail::tail($filePath, $numberOfLines);
 
 // ["line 30", "line 31"]
 ```
-
-## Features
-
-- It doesn't load the whole file to memory
-- Skips trailing new lines and empty lines
-- No dependencies
