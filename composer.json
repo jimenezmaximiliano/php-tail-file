@@ -9,7 +9,7 @@
             "email": "jimenez@maximiliano.com.ar"
         }
     ],
-    "version": "1.0.2",
+    "version": "1.0.6",
     "autoload": {
         "psr-4": {
             "JimenezMaximiliano\\Tail\\": "src/"
