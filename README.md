@@ -14,7 +14,7 @@ Efficiently tail a file from PHP - Reads the last x number of lines of a file
 - Skips trailing new lines and empty lines
 - No dependencies
 - Tested on Linux, Windows and macOS
-- Compatible with PHP 7.4 and 8
+- Compatible with PHP 7.4, 8 and 8.1
 
 Usually used to read the last lines of:
 

@@ -4,7 +4,7 @@ jobs:
   build:
     strategy:
       matrix:
-        php: [ '7.4', '8.0' ]
+        php: [ '7.4', '8.0', '8.1' ]
         os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
         phpunit: ['9']
     runs-on: ${{ matrix.os }}
@@ -17,7 +17,7 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom
-          coverage: xdebug 
+          coverage: xdebug
           tools: phpunit:${{ matrix.phpunit }}
       - name: Run composer install
         run: composer install
