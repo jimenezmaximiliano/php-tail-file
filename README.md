@@ -1,7 +1,6 @@
 # PHP Tail File
 [![Latest Version](https://img.shields.io/github/release/jimenezmaximiliano/php-tail-file.svg?style=flat-square)](https://github.com/jimenezmaximiliano/php-tail-file/releases)
 [![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
-[![Build Status](https://img.shields.io/github/workflow/status/jimenezmaximiliano/php-tail-file/CI?label=ci%20build&style=flat-square)](https://github.com/jimenezmaximiliano/php-tail-file/actions?query=workflow%3ACI)
 [![Coverage](https://img.shields.io/badge/Coverage-88.57-yellow.svg)](https://GitHub.com/Naereen/StrapDown.js/graphs/commit-activity)
 
 Efficiently tail a file from PHP - Reads the last x number of lines of a file
