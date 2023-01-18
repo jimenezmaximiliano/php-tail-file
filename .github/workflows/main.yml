@@ -6,7 +6,7 @@ jobs:
       matrix:
         php: [ '7.4', '8.0', '8.1', '8.2' ]
         os: ['ubuntu-latest', 'windows-latest', 'macos-latest']
-        phpunit: ['9']
+        phpunit: ['8']
     runs-on: ${{ matrix.os }}
     name: PHP version ${{ matrix.php }} on ${{ matrix.os }}
     steps:
