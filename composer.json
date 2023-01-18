@@ -9,7 +9,7 @@
             "email": "three141592@protonmail.com"
         }
     ],
-    "version": "1.1.5",
+    "version": "1.1.6",
     "autoload": {
         "psr-4": {
             "JimenezMaximiliano\\Tail\\": "src/"
